@@ -20,46 +20,33 @@ class Upload extends BaseController
 
     public function post()
     {
-        /*$validationRule = [
-            'userfile' => [
-                'label' => 'Image File',
-                'rules' => [
-                    'uploaded[userfile]',
-                    'is_image[userfile]',
-                    'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
-                    'max_size[userfile,100]',
-                    'max_dims[userfile,1024,768]',
-                ],
-            ],
-        ];*/
-        /*
-        if (! $this->validateData([], $validationRule)) {
-            $data = ['errors' => $this->validator->getErrors()];
-
-            return view('upload_form', $data);
-        }*/
-
         $userfile = $this->request->getFile('userfile');
-        $fd = fopen('php://temp/userfile', 'w') or die('не удалось создать файл');
-        fputs($fd, $userfile);
-        //fclose($fd);
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('php://temp/userfile');
+        if (!$userfile) throw new \Exception('нет $userfile');
+
+    	$tmpfname = tempnam(sys_get_temp_dir(), '');
+		if (!$tmpfname) throw new \Exception("не удалось создать имя $tmpfname");
+
+    	$fhandler = fopen($tmpfname, "w");
+    	if (!$fhandler) throw new \Exception('не удалось создать файл $tmpfname');
+
+		$result = fwrite($fhandler, $userfile);
+        if (!$result) throw new \Exception('не удалось записать файл $tmpfname');
+
+        $spreadSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($tmpfname);
+        //$spreadSheet->getActiveSheet()->setCellValue('A1', 1513789642);
+        fclose($fd);
+        $inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($tmpfname);
+        echo $inputFileType;
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($tmpfname);
+        //$workSheet = $spreadSheet->getActiveSheet();
+        //$cell = $workSheet->getCell('A1');
+        //echo "value: ", $cell->getValue(), "<br>";
         //$size = $userfile->getSize();
         //echo $size;
         //$type = $userfile->getMimeType();
         //echo $type; // image/png
-
-        /*
-        if (! $img->hasMoved()) {
-            $filepath = WRITEPATH . 'uploads/' . $img->store();
-
-            $data = ['uploaded_fileinfo' => new File($filepath)];
-
-            return view('upload_success', $data);
-        }
-
-        $data = ['errors' => 'The file has already been moved.'];
-        */
 
         return view('upload_form', ['errors' => []]);
     }
