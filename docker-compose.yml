@@ -21,6 +21,7 @@ services:
     volumes:
       - ./CI4:/var/www
     #command: sh -cx "chown www-data:www-data /var/www -R"
+    #command: sh -cx "php /var/www/composer.phar install -d /var/www"
 
   mysql:
     container_name: mysql
