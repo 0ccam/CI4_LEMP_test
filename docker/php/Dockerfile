@@ -1,9 +1,9 @@
 # PHP-FPM
 
-FROM php:8.3-fpm
+FROM dockerhub.timeweb.cloud/library/php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
-	#unzip \
+	unzip \
 	# Нужно для intl
 	libicu-dev \ 
 	# Нужно для zip
@@ -23,7 +23,8 @@ RUN apt-get update && apt-get install -y \
 	dom \
 	gd \
 	pdo \
-	pdo_mysql
+	pdo_mysql \
+	mysqli
 
 WORKDIR /var/www/public
 ENTRYPOINT [ "php-fpm" ]
