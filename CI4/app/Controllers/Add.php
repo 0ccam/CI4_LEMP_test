@@ -14,9 +14,15 @@ class Add extends BaseController
 		$smp_list = $revision->getSmpTitles()->getData();
 		$inspector_list = $revision->getInspectorTitles()->getData();
 
-		$html = view('header');
-		$html .= view('add_form', ['smp_list' => $smp_list, 'inspector_list' => $inspector_list, 'defaults' => []]);
-		$html .= view('import_form');
+		$html = '';
+		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/style.css">';
+		//$html = view('header');
+		//$html .= view('site/header');
+		$html .= view('site/topnav');
+		$html .= view('site/add_form');
+		//$html .= view('add_form', ['smp_list' => $smp_list, 'inspector_list' => $inspector_list, 'defaults' => []]);
+		//$html .= view('import_form');
+		$html .= view('site/footer');
 		return $html;
 	}
 

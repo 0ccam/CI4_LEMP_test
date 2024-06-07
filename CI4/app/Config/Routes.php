@@ -6,6 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 //$routes->get('/', 'Home::index');
+//$routes->get('/', 'Main::index');
 $routes->get('/', 'Checklist::index');
 $routes->get('export', 'Checklist::export');
 $routes->post('search', 'Checklist::search');
