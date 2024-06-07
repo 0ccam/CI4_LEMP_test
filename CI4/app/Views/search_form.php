@@ -1,9 +1,9 @@
 <?php
 
 helper('form');
-echo '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/form.css">';
-echo '<div class="form-style-2-heading">Перечень плановых проверок</div>';
-echo form_open('search', 'method="POST" class="form-style-2"');
+//echo '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/form.css">';
+echo '<h3>Перечень плановых проверок</h3>';
+echo form_open('search', 'method="POST" ');
 echo "<b>%</b> заменяет любое количество любых символов в начале и/или конце фразы<br><b>_</b> заменяет один любой символ<br>Формат даты <b>гггг-мм-дд</b><br>";
 
 function addField($def_values, $params)

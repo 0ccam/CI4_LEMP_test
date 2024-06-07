@@ -32,7 +32,7 @@ helper('form');
 
 echo '<h3>Добавление проверки</h3>';
 echo '* новая проверка не должна пересекаться по времени с уже созданными при прочих равных';
-echo form_open('edit', 'method="POST"  class="form-style-2"');
+echo form_open('edit', 'method="POST" ');
 
 echo form_label('Выберите СМП', 'smp_title');
 echo form_dropdown('smp_title', getTitlesArray($smp_list), if_exist($defaults, 'smp_title'));
