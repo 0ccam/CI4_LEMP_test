@@ -8,7 +8,7 @@
 						<label for="revision_id">Введите номер записи о проверке</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="revision_id" name="revision_duration">
+						<input type="text" id="revision_id" name="revision_id">
 					</div>
 				</div>
 				<div class="row">

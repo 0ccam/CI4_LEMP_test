@@ -29,21 +29,24 @@ class Edit extends BaseController
 		$html .= view('site/topnav');
 		$html .= view('site/open_form');
 		$request = $this->request->getPost();
+		//var_dump($request);
 		if (array_key_exists('revision_id', $request) and $request['revision_id']) {
 			$revision_id = $request['revision_id'];
 			$revision = new Revision();
+			//var_dump($revision);
 			$revise = $revision->getRevision($revision_id);
 			$smp_titles = $revision->getSmpTitles()->getData();
 			$inspector_titles = $revision->getInspectorTitles()->getData();
 			if ($revise->isData()) {
 				$data = $revise->getData();
-				$html .= view('edit_form', ['smp_titles' => $smp_titles, 'inspector_titles' => $inspector_titles, 'defaults' => $data]);
-				$html .= view('delete_form', ['hidden_data' => $request]);
+				$html .= view('site/edit_form', ['smp_titles' => $smp_titles, 'inspector_titles' => $inspector_titles, 'defaults' => $data]);
+				$html .= view('site/delete_form', ['hidden' => $request]);
 			}
 			if ($revise->isError()) {
 				$html .= view('site/message_view', ['messages'=>$revise->getErrors()]);
 			}
 		}
+		$html .= view('site/footer');
 		return $html;
 	}
 
