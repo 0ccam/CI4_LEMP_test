@@ -12,15 +12,22 @@ class Edit extends BaseController
 {
 	public function index()
 	{
-		$html = view('header');
-		$html .= view('open_form');
+		$html = '';
+		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/style.css">';
+		$html .= view('site/header');
+		$html .= view('site/topnav');
+		$html .= view('site/open_form');
+		$html .= view('site/footer');
 		return $html;
 	}
 
 	public function open()
 	{
-		$html = view('header');
-		$html .= view('open_form');
+		$html = '';
+		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/style.css">';
+		$html .= view('site/header');
+		$html .= view('site/topnav');
+		$html .= view('site/open_form');
 		$request = $this->request->getPost();
 		if (array_key_exists('revision_id', $request) and $request['revision_id']) {
 			$revision_id = $request['revision_id'];
@@ -34,7 +41,7 @@ class Edit extends BaseController
 				$html .= view('delete_form', ['hidden_data' => $request]);
 			}
 			if ($revise->isError()) {
-				$html .= view('message_view', ['messages'=>$revise->getErrors()]);
+				$html .= view('site/message_view', ['messages'=>$revise->getErrors()]);
 			}
 		}
 		return $html;

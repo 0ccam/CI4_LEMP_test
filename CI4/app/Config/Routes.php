@@ -9,6 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 //$routes->get('/', 'Main::index');
 $routes->get('/', 'Checklist::index');
 $routes->get('export', 'Checklist::export');
+$routes->get('search', 'Checklist::search');
 $routes->post('search', 'Checklist::search');
 
 $routes->get('add', 'Add::index');

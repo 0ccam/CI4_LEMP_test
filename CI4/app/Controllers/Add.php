@@ -16,12 +16,10 @@ class Add extends BaseController
 
 		$html = '';
 		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/style.css">';
-		//$html = view('header');
-		//$html .= view('site/header');
+		$html .= view('site/header');
 		$html .= view('site/topnav');
-		$html .= view('site/add_form');
-		//$html .= view('add_form', ['smp_list' => $smp_list, 'inspector_list' => $inspector_list, 'defaults' => []]);
-		//$html .= view('import_form');
+		$html .= view('site/add_form', ['smp_list' => $smp_list, 'inspector_list' => $inspector_list, 'defaults' => []]);
+		$html .= view('site/import_form');
 		$html .= view('site/footer');
 		return $html;
 	}
@@ -36,10 +34,13 @@ class Add extends BaseController
 		$result = $revision->add($request);
 		$message = $result->isError() ? $result->getErrors() : ['Запись добавлена'];
 
-		$html = view('header');
-		$html .= view('add_form', ['smp_list' => $smp_list, 'inspector_list' => $inspector_list, 'defaults' => $request]);
-		$html .=view('message_view', ['messages'=>$message]);
-		$html .= view('import_form');
+		$html = '';
+		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/style.css">';
+		$html .= view('site/header');
+		$html .= view('site/topnav');
+		$html .= view('site/add_form', ['smp_list' => $smp_list, 'inspector_list' => $inspector_list, 'defaults' => $request]);
+		$html .=view('site/message_view', ['messages'=>$message]);
+		//$html .= view('import_form');
 		return $html;
 	}
 
@@ -111,9 +112,12 @@ class Add extends BaseController
 		if(!$userfile) return 'no file!';
 		$messages = collector($userfile);
 
-		$html = view('header');
-		$html .= view('import_form');
-		$html .=view('message_view', ['messages'=>$messages]);
+		$html = '';
+		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/style.css">';
+		$html .= view('site/header');
+		$html .= view('site/topnav');
+		//$html .= view('site/import_form');
+		$html .=view('site/message_view', ['messages'=>$messages]);
 		return $html;
 	}
 }

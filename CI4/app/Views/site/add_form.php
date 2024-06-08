@@ -38,14 +38,14 @@ input[type="number"] {
 <h2>Добавление проверки</h2>
 <h5>* новая проверка не должна пересекаться по времени с уже созданными при прочих равных значениях</h5>
 <div class="container">
-  <form action="edit" method="POST" >
+  <form action="add" method="POST" >
 <!--
   <div class="row">
     <div class="col-25">
       <label for="revision_id">№</label>
     </div>
     <div class="col-75">
-      <input type="text" id="revision_id" name="revision_id" placeholder="Your name..">
+      <input type="text" id="revision_id" name="revision_id" placeholder="Id">
     </div>
   </div>
 -->
@@ -55,9 +55,9 @@ input[type="number"] {
     </div>
     <div class="col-75">
       <select id="smp_title" name="country">
-        <option value="australia">Australia</option>
-        <option value="canada">Canada</option>
-        <option value="usa">USA</option>
+	<?php foreach ($smp_list as $smp) {
+		echo "<option value='{$smp['title']}'>{$smp['title']}</option>";
+	}?>
       </select>
     </div>
   <div class="row">
@@ -66,9 +66,9 @@ input[type="number"] {
     </div>
     <div class="col-75">
       <select id="inspector_title" name="country">
-        <option value="australia">Australia</option>
-        <option value="canada">Canada</option>
-        <option value="usa">USA</option>
+	<?php foreach ($inspector_list as $ins) {
+		echo "<option value='{$ins['title']}'>{$ins['title']}</option>";
+	}?>
       </select>
     </div>
   </div>
@@ -120,7 +120,7 @@ input[type="number"] {
 -->
   <br>
   <div class="row">
-    <input type="submit" value="Искать">
+    <input type="submit" value="Добавить">
   </div>
   </form>
 </div>

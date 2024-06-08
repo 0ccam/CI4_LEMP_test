@@ -13,13 +13,12 @@ class Checklist extends BaseController
 
 	public function index(): string
 	{
+		$request = $this->request->getPost();
 		$html = '';
 		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/style.css">';
-		//$html .= view('site/header');
+		$html .= view('site/header');
 		$html .= view('site/topnav');
-		$html .= view('site/search_form');
-		//$html = view('header');
-		/*$html .= view('search_form', [
+		$html .= view('site/search_form' , [
 			'defaults' => [
 				'revision_id' => '%',
 				'revision_duration' => '%',
@@ -27,8 +26,7 @@ class Checklist extends BaseController
 				'inspector_title' => '%',
 				'revision_start' => '1970-01-01',
 				'revision_stop' => '2038-01-19',
-			]]);*/
-		//$html .= view('site/row', ['title_heading' => 'Титульный заголовок', 'title_description' => 'Титульное описание', 'text' => 'Текстовая строка...']);
+			]]);
 		$html .= view('site/footer');
 		return $html;
 	}
@@ -42,16 +40,16 @@ class Checklist extends BaseController
 		$html = '';
 		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/style.css">';
 		$html .= '<link rel="stylesheet" type="text/css" href="' . base_url() . 'css/table.css">';
-		//$html .= view('site/header');
+		$html .= view('site/header');
 		$html .= view('site/topnav');
 		$html .= view('site/search_form', ['defaults' => $request]);
 		if ($found->isError()) {
-			$html .= view('message_view', ['messages' => $found->getErrors()]);
+			$html .= view('site/message_view', ['messages' => $found->getErrors()]);
 		} elseif ($found->isData()) {
-			$html .= view('export_form', ['hidden' => $request]);
+			$html .= view('site/export_form', ['hidden' => $request]);
 			$html .= view('site/table_view', ['table_header' => $revision->getHeader(), 'table_body' => $found->getData()]);
 		} else {
-			$html .= view('message_view', ['messages' => ['Ничего не найдено']]);
+			$html .= view('site/message_view', ['messages' => ['Ничего не найдено']]);
 		}
 		return $html;
 	}
