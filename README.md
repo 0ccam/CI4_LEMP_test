@@ -28,18 +28,14 @@
    ```
     $ docker exec -it php_fpm php /var/www/composer.phar install -d /var/www/
    ```
-  ? 1. Откройте список запущенных контейнеров:
-      ```
-      $ docker ps
-      ```
-   ?2. В столбце CONTAINER ID найдите 12-ти значный идентификатор, соответсвующий контнейнеру с именем php_fpm.
-   ?3. Запомните первые 2-3 символа идентификатора.
-   ?4. Запустите Composer внутри контейнера, подставив запомненное значение вместо XXX:
-      ```
-      $ docker exec -it XXX php /var/www/composer.phar install -d /var/www/
-      ```
-7. Создать базу данных с именем ci4 в PhpMyAdmin
-8. Запустить миграцию.
+7. Создать базу данных с именем ci4 в PhpMyAdmin:
+   1. Перейти по адресу localhost:8000
+   2. Логин: root, пароль root
+   3. Выполнить команду: CREATE DATABASE ci4;
+9. Запустить миграцию:
+    ```
+    $ docker exec -it php_fpm php /var/www/spark migrate
+    ```
 
 Файл .env изменён и исключен из gitignore
 
