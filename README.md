@@ -28,11 +28,11 @@
    ```
     $ docker exec -it php_fpm php /var/www/composer.phar install -d /var/www/
    ```
-7. Создать базу данных с именем ci4 в PhpMyAdmin:
+7. Создайте базу данных с именем ci4 в PhpMyAdmin:
    1. Перейти по адресу localhost:8000
    2. Логин: root, пароль root
    3. Выполнить команду: CREATE DATABASE ci4;
-9. Запустить миграцию:
+9. Запустите миграцию:
     ```
     $ docker exec -it php_fpm php /var/www/spark migrate
     ```
